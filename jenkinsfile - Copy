@@ -1,0 +1,53 @@
+pipeline{
+    agent any
+    environment {
+        DIRECTORY_PATH= "jugnu"
+        TESTING_ENVIRONMENT= "Test"
+        PRODUCTION_ENVIRONMENT= "Aafiya Irfan"
+    } 
+    stages{
+        stage('Build'){
+            steps{
+                echo "Fetch the source code from the directory path, $DIRECTORY_PATH"
+                echo "compile the code and generate any necessary artifacts"
+            }
+        }
+        stage('Test'){
+            steps{
+                echo "Unit tests!"
+                echo "Integration tests!"
+            }
+            post{
+                success{
+                    mail to: "aafiyairfan2113@gmail.com",
+                    subject: "Build Status Email",
+                    body: "Build was Successful!"
+                }
+            }
+        }
+        stage('Code Quality Check'){
+            steps{
+                echo "Check the quality of the code!"
+
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo "Deploy the application to this testing environment, $TESTING_ENVIRONMENT"
+
+            }
+        }
+        stage('Approval'){
+            steps{
+                sleep 10
+
+            }
+        }
+        stage('Deploy to Prdouction'){
+            steps{
+                echo "Deploy the code to this production environment, $PRODUCTION_ENVIRONMENT"
+
+            }
+        }  
+    }  
+}
