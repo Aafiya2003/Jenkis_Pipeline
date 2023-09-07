@@ -14,11 +14,12 @@ pipeline{
             }
             post{
                 success{
+                    def logFiles = findFiles(glob: '**/*.log')
                     emailext(
                     subject: "Build Status Email",
                     body: "Build was Successful!",
                     to: "aafiyairfan2113@gmail.com",
-                    attachmentsPattern: "**/*.log"
+                    attachments: logFiles
                     )
                     
                 }
