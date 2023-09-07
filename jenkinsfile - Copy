@@ -17,7 +17,7 @@ pipeline{
                    script {
                        emailext(
                            subject: "Build Status Email",
-                           body: "The stage has successfully completed!",
+                           body: "The Unit and Integration Tests have been Completed!",
                            to: 'aafiyairfan2113@gmail.com',
                            attachLog: true
                 )
@@ -40,10 +40,13 @@ pipeline{
 
             }
             post{
-                success{
-                    mail to: "aafiyairfan2113@gmail.com",
-                    subject: "Successful",
-                    body: "Security Scan was Successful!"
+                always{
+                   script{
+                       emailext{
+                           mail to: "aafiyairfan2113@gmail.com",
+                           subject: "Successful",
+                           body: "Security Scan was Successful!"
+                           attachLog: true
                 }
             }
         }
