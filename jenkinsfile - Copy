@@ -1,21 +1,16 @@
 pipeline{
     agent any
-    environment {
-        DIRECTORY_PATH= "jugnu"
-        TESTING_ENVIRONMENT= "Test"
-        PRODUCTION_ENVIRONMENT= "Aafiya Irfan"
-    } 
     stages{
         stage('Build'){
             steps{
-                echo "Fetch the source code from the directory path, $DIRECTORY_PATH"
-                echo "compile the code and generate any necessary artifacts"
+                echo "In theis Stage: Build the code using a buld automation tool to complie and package your code."
+                echo "Build automation tools that can be used to do this are Maven and/or Gradle."
             }
         }
-        stage('Test'){
+        stage('Unit and Integration Tests'){
             steps{
-                echo "Unit tests!"
-                echo "Integration tests!"
+                echo "In this Stage: Run  unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected"
+                echo "Test automation tools that can be used are JUnit or pytest for Unit tests and for Integeration test  you can use tools like Postman for API testing or Selenium for web application testing"
             }
             post{
                 success{
@@ -25,27 +20,45 @@ pipeline{
                 }
             }
         }
-        stage('Code Quality Check'){
+        stage('Code Analysis'){
             steps{
-                echo "Check the quality of the code!"
+                echo "In this stage: Integrate code analysis tools to analyse the code and ensure it meets industry standards"
+                echo "Code Analysis tool that can be used is SonarQube, easy integration as Jenkins has a plugin."
 
             }
         }
-        stage('Deploy'){
+        stage('Security Scan'){
             steps{
-                echo "Deploy the application to this testing environment, $TESTING_ENVIRONMENT"
+                echo "In this stage: Perform a security scan on the code using tools to identify any vulnerabilities."
+                echo "Security scan tools that can be used are OWASP ZAP (Zed Attack Proxy) or Nessus."
+
+            }
+            post{
+                success{
+                    mail to: "aafiyairfan2113@gmail.com",
+                    subject: "Build Status Email",
+                    body: "Build was Successful!"
+                }
+            }
+        }
+        stage('Deploy to staging'){
+            steps{
+                echo "In this stage: Deploy the application to a staging server."
+                echo "Deployment tools like AWS CodeDeploy, Ansible, or Docker can be used to deploy to the staging server, AWS EC2 instance."
 
             }
         }
-        stage('Approval'){
+        stage('Integration Tests on Staging'){
             steps{
-                sleep 10
+                echo "In this stage: Run integration tests on the staging envrionment to ensure that the application functions as expected in a production line envrionment."
+                echo "Similar to Stage 2, tools that can be used are JUnit or pytest for Unit tests and for Integeration test  you can use tools like Postman for API testing or Selenium for web application testing."
 
             }
         }
         stage('Deploy to Prdouction'){
             steps{
-                echo "Deploy the code to this production environment, $PRODUCTION_ENVIRONMENT"
+                echo "Deploy the application to a production sever like the AWS EC2 instance."
+                echo "Similar to Stage 5,tools like AWS CodeDeploy, Ansible, or Docker can be used to deploy to the production server, AWS EC2 instance "
 
             }
         }  
