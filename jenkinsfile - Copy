@@ -14,16 +14,17 @@ pipeline{
             }
             post{
                 always{
-                   script {
-                       emailext(
+                    script{
+                        emailext(
                            subject: "Build Status Email",
                            body: "The Unit and Integration Tests have been Completed!",
                            to: 'aafiyairfan2113@gmail.com',
                            attachLog: true
-                )
-            }
-                    
+
+                        )
+                    }
                 }
+                
             }
         }
         stage('Code Analysis'){
@@ -47,8 +48,8 @@ pipeline{
                            subject: "Successful",
                            body: "Security Scan was Successful!"
                            attachLog: true
-                }
-            }
+                        }
+                    }   }  }  
         }
         stage('Deploy to staging'){
             steps{
