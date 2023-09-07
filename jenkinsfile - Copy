@@ -13,13 +13,13 @@ pipeline{
                 echo "Test automation tools that can be used are JUnit or pytest for Unit tests and for Integeration test  you can use tools like Postman for API testing or Selenium for web application testing"
             }
             post{
-                success{
+                always{
                    script {
                        emailext(
                            subject: "Build Status Email",
                            body: "The stage has successfully completed!",
                            to: 'aafiyairfan2113@gmail.com',
-                           attachmentsPattern: "**/*.log"
+                           attachLog: true
                 )
             }
                     
