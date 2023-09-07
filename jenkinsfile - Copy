@@ -15,7 +15,7 @@ pipeline{
             post{
                 success{
                     mail to: "aafiyairfan2113@gmail.com",
-                    subject: "Build Status Email",
+                    subject: "Successful",
                     body: "Unit and Integration tests were Successful!"
                     attachmentsPattern: "**/*.log" 
                 }
@@ -37,7 +37,7 @@ pipeline{
             post{
                 success{
                     mail to: "aafiyairfan2113@gmail.com",
-                    subject: "Build Status Email",
+                    subject: "Successful",
                     body: "Security Scan was Successful!"
                 }
             }
