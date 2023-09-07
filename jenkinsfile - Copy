@@ -17,6 +17,7 @@ pipeline{
                     mail to: "aafiyairfan2113@gmail.com",
                     subject: "Build Status Email",
                     body: "Unit and Integration tests were Successful!"
+                    attachment: logFiles, 
                 }
             }
         }
