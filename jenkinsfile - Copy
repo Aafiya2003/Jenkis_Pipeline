@@ -14,13 +14,17 @@ pipeline{
             }
             post{
                 success{
-                    def logFiles = findFiles(glob: '**/*.log')
-                    emailext(
-                    subject: "Build Status Email",
-                    body: "Build was Successful!",
-                    to: "aafiyairfan2113@gmail.com",
-                    attachments: logFiles
-                    )
+                   script {
+                       def logFiles = findFiles(glob: '**/*.log') // Find all log files in the workspace
+                       emailext(
+                           subject: 'Stage Successful: ${currentBuild.currentResult}',
+                           body: 'The stage has successfully completed!',
+                           to: 'recipient@example.com',
+                           attachments: logFiles, // Attach all found log files
+                           mimeType: 'text/plain', // Set MIME type for log files
+                           recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+                )
+            }
                     
                 }
             }
