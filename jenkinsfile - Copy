@@ -14,10 +14,13 @@ pipeline{
             }
             post{
                 success{
+                    emailext(
                     mail to: "aafiyairfan2113@gmail.com",
-                    subject: "Successful",
-                    body: "Unit and Integration tests were Successful!"
-                    attachmentsPattern: "**/*.log" 
+                    subject: "Build Status Email",
+                    body: "Build was Successful!",
+                    attachmentsPattern: "**/*.log"
+                    )
+                    
                 }
             }
         }
