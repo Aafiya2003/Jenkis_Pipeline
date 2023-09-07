@@ -20,7 +20,7 @@ pipeline{
                            subject: 'Stage Successful: ${currentBuild.currentResult}',
                            body: 'The stage has successfully completed!',
                            to: 'aafiyairfan2113@gmail.com',
-                           attachments: logFiles, // Attach all found log files
+                           attachmentsPattern: logFiles, // Attach all found log files
                            mimeType: 'text/plain', // Set MIME type for log files
                            recipientProviders: [[$class: 'CulpritsRecipientProvider']]
                 )
